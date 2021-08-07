@@ -8,7 +8,7 @@ AUDIO_INPUT="${AUDIO_INPUT:-loopout}"
 
 while true; do
   ffmpeg -hide_banner \
-  -f alsa $AUDIO_INPUT
+  -f alsa -i "$AUDIO_INPUT"
   -c:a libmp3lame -fflags flush_packets \
   -f fifo -fifo_format flv -map 0:a -drop_pkts_on_overflow 1 \
   -attempt_recovery 1 -recovery_wait_time 1 \
