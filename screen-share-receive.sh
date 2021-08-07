@@ -11,5 +11,5 @@ while true; do
   -fflags nobuffer \
   -rw_timeout 1000000 \
   -f live_flv -i "${LIVE_SERVER}/${STREAM_KEY}" \
-  -f v4l2 "$V4L2_OUTPUT" \
+  -f v4l2 "$V4L2_OUTPUT"
 done
