@@ -26,9 +26,12 @@ while true; do
   -attempt_recovery 1 -recovery_wait_time 1 \
   "${LIVE_SERVER}/${PREVIEW_STREAM_KEY}"
 
-  echo "Restart QX100 LiveView"
+  curl_pid="$(ps auxf | grep 'curl --silent -N' | grep -v grep | awk '{print $2}')"
 
-  kill $(ps auxf | grep 'curl --silent -N' | grep -v grep | awk '{print $2}')
+  if [ "$curl_pid" ]; then
+    echo "Restart QX100 LiveView"
+    kill "$curl_pid"
+  fi
 
   echo "Fallback to ${BACKUP_STREAM_KEY}"
 
