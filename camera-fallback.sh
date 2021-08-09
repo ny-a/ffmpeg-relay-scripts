@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-set -eu
+set -u
 
 LIVE_SERVER="${LIVE_SERVER:-rtmp://localhost/live}"
 MAIN_STREAM_KEY="${MAIN_STREAM_KEY:-camera-main}"

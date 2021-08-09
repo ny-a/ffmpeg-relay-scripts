@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-set -eu
+set -u
 
 LIVE_SERVER="${LIVE_SERVER:-rtmp://localhost/live}"
 PREVIEW_STREAM_KEY="${PREVIEW_STREAM_KEY:-sound-1-in}"
