@@ -4,7 +4,7 @@ set -eu
 
 LIVE_SERVER="${LIVE_SERVER:-rtmp://localhost/live}"
 STREAM_KEY="${PREVIEW_STREAM_KEY:-camera}"
-V4L2_INPUT="${V4L2_INPUT:-/dev/video0}"
+V4L2_INPUT="${V4L2_INPUT:-/dev/video10}"
 
 while true; do
   ffmpeg -hide_banner \
