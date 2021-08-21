@@ -9,7 +9,6 @@ AUDIO_OUTPUT="${AUDIO_OUTPUT:-intoutmix}"
 while true; do
   ffmpeg -hide_banner \
   -use_wallclock_as_timestamps 1 \
-  -fflags nobuffer \
   -c:a "$INPUT_CODEC" -f alsa -i "$AUDIO_INPUT" \
   $@ \
   -f alsa "$AUDIO_OUTPUT"
