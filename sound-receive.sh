@@ -11,6 +11,7 @@ while true; do
   -use_wallclock_as_timestamps 1 \
   -probesize 32 -analyzeduration 0 \
   -fflags nobuffer \
+  -rw_timeout 1000000 \
   -f live_flv -i "rtmp://${LIVE_SERVER}/live/${STREAM_KEY}" \
   $@ \
   -f alsa $AUDIO_OUTPUT
