@@ -24,7 +24,7 @@ while true; do
   $@ \
   -f v4l2 "$V4L2_OUTPUT"
 
-  restart_pid="$(ps auxf | grep '${RESTART_TARGET}' | grep -v grep | awk '{print $2}')"
+  restart_pid="$(ps auxf | grep "${RESTART_TARGET}" | grep -v grep | awk '{print $2}')"
 
   if [ "$restart_pid" ]; then
     echo "Sending ${RESTART_SIGNAL} signal to target process ${restart_pid}..."
