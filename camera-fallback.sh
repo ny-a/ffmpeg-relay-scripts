@@ -19,7 +19,7 @@ while true; do
   -fflags nobuffer \
   -rw_timeout 1000000 \
   -f live_flv -i "rtmp://${LIVE_SERVER}/live/${MAIN_STREAM_KEY}" \
-  -flags low_delay -strict experimental \
+  -strict experimental \
   $@ \
   -f v4l2 "$V4L2_OUTPUT"
 
@@ -38,7 +38,7 @@ while true; do
   -fflags nobuffer \
   -rw_timeout 1000000 \
   -f live_flv -i "rtmp://${LIVE_SERVER}/live/${BACKUP_STREAM_KEY}" \
-  -flags low_delay -strict experimental \
+  -strict experimental \
   -t "$FALLBACK_DURATION" \
   $@ \
   -f v4l2 "$V4L2_OUTPUT"

@@ -17,7 +17,7 @@ while true; do
   -rw_timeout 1000000 \
   -framerate "$FRAMERATE" \
   -f mjpeg -i - \
-  -flags low_delay -strict experimental \
+  -strict experimental \
   -vf "crop=${VIDEO_SIZE}" \
   -b:v "$BITRATE" -c:v flv -pix_fmt yuv420p \
   -fflags flush_packets \

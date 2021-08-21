@@ -16,7 +16,7 @@ while true; do
   -video_size "$VIDEO_SIZE" \
   -framerate "$FRAMERATE" \
   -f v4l2 -i "$V4L2_INPUT" \
-  -flags low_delay -strict experimental \
+  -strict experimental \
   -c:v copy \
   -fflags flush_packets \
   -f fifo -fifo_format flv -map 0:v -drop_pkts_on_overflow 1 \

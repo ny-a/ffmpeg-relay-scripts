@@ -13,7 +13,7 @@ while true; do
   -use_wallclock_as_timestamps 1 \
   -c:a "$INPUT_CODEC" -f alsa -i "$AUDIO_INPUT" \
   -f alsa "$AUDIO_OUTPUT" \
-  -flags low_delay -strict experimental \
+  -strict experimental \
   -c:a aac -fflags flush_packets \
   -f fifo -fifo_format flv -map 0:a -drop_pkts_on_overflow 1 \
   -attempt_recovery 1 -recovery_wait_time 1 \

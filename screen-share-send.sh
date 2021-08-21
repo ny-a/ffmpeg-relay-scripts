@@ -15,7 +15,7 @@ while true; do
   -s "$VIDEO_SIZE" \
   -f x11grab -i "${DISPLAY}+${POSITION}" \
   -c:v flv -b:v "$BITRATE" -fflags flush_packets \
-  -flags low_delay -strict experimental \
+  -strict experimental \
   -pix_fmt yuv420p -preset ultrafast -tune zerolatency \
   -f fifo -fifo_format flv -map 0:v -drop_pkts_on_overflow 1 \
   -attempt_recovery 1 -recovery_wait_time 1 \
