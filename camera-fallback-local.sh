@@ -30,7 +30,7 @@ while true; do
     kill "-${RESTART_SIGNAL}" "$restart_pid"
   fi
 
-  echo "Fallback to ${BACKUP_STREAM_KEY}"
+  echo "Fallback to ${BACKUP_V4L2_INPUT}"
 
   ffmpeg -hide_banner \
   -use_wallclock_as_timestamps 1 \
