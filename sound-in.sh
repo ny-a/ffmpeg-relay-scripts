@@ -2,19 +2,21 @@
 
 set -u
 
-LIVE_SERVER="${LIVE_SERVER:-rtmp://localhost/live}"
-PREVIEW_STREAM_KEY="${PREVIEW_STREAM_KEY:-sound-1-in}"
-AUDIO_INPUT="${AUDIO_INPUT:-pinmic}"
-AUDIO_OUTPUT="${AUDIO_OUTPUT:-loopout}"
+LIVE_SERVER="${LIVE_SERVER:-localhost}"
+STREAM_KEY="${STREAM_KEY:-sound-in}"
+INPUT_CODEC="${INPUT_CODEC:-pcm_s16le}"
+AUDIO_INPUT="${AUDIO_INPUT:-intinsnoop}"
+AUDIO_OUTPUT="${AUDIO_OUTPUT:-loopout0mix}"
 
 while true; do
   ffmpeg -hide_banner \
-  -f alsa -i $AUDIO_INPUT \
-  -af 'aresample=async=1:min_hard_comp=0.100000:first_pts=0' \
-  -f alsa $AUDIO_OUTPUT \
-  -af 'aresample=async=1:min_hard_comp=0.100000:first_pts=0' \
+  -use_wallclock_as_timestamps 1 \
+  -c:a "$INPUT_CODEC" -f alsa -i "$AUDIO_INPUT" \
+  -f alsa "$AUDIO_OUTPUT" \
+  -flags low_delay -strict experimental \
   -c:a aac -fflags flush_packets \
   -f fifo -fifo_format flv -map 0:a -drop_pkts_on_overflow 1 \
   -attempt_recovery 1 -recovery_wait_time 1 \
-  "${LIVE_SERVER}/${PREVIEW_STREAM_KEY}"
+  $@ \
+  "rtmp://${LIVE_SERVER}/live/${STREAM_KEY}"
 done
