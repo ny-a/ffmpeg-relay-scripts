@@ -7,7 +7,7 @@ STREAM_KEY="${STREAM_KEY:-screen}"
 DISPLAY="${DISPLAY:-:0}"
 POSITION="${POSITION:-0,0}"
 VIDEO_SIZE="${VIDEO_SIZE:-1920x1080}"
-BITRATE="${BITRATE:-12M}"
+BITRATE="${BITRATE:-10M}"
 
 while true; do
   ffmpeg -hide_banner \
