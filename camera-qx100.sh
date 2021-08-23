@@ -8,6 +8,7 @@ VIDEO_SIZE="${VIDEO_SIZE:-640:360}"
 BITRATE="${BITRATE:-1M}"
 FRAMERATE="${FRAMERATE:-30}"
 QX100_URL="http://10.0.0.1:60152/liveview.JPG?%211234%21http%2dget%3a%2a%3aimage%2fjpeg%3a%2a%21%21%21%21%21"
+INPUT_OPTION="${INPUT_OPTION:-}"
 
 while true; do
   curl --silent -N "$QX100_URL" | \
@@ -16,6 +17,7 @@ while true; do
   -fflags nobuffer \
   -rw_timeout 1000000 \
   -framerate "$FRAMERATE" \
+  $INPUT_OPTION \
   -f mjpeg -i - \
   -strict experimental \
   -vf "crop=${VIDEO_SIZE}" \

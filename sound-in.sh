@@ -6,13 +6,17 @@ LIVE_SERVER="${LIVE_SERVER:-localhost}"
 STREAM_KEY="${STREAM_KEY:-sound-in}"
 INPUT_CODEC="${INPUT_CODEC:-pcm_s16le}"
 OUTPUT_CODEC="${OUTPUT_CODEC:-pcm_s16le}"
+INPUT_OPTION="${INPUT_OPTION:-}"
+OUTPUT_OPTION="${OUTPUT_OPTION:-}"
 AUDIO_INPUT="${AUDIO_INPUT:-intinsnoop}"
 AUDIO_OUTPUT="${AUDIO_OUTPUT:-loopout0mix}"
 
 while true; do
   ffmpeg -hide_banner \
   -use_wallclock_as_timestamps 1 \
+  $INPUT_OPTION \
   -c:a "$INPUT_CODEC" -f alsa -i "$AUDIO_INPUT" \
+  $OUTPUT_OPTION \
   -c:a "$OUTPUT_CODEC" -f alsa "$AUDIO_OUTPUT" \
   -strict experimental \
   -c:a aac -fflags flush_packets \

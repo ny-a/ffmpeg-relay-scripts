@@ -12,6 +12,6 @@ while true; do
   -fflags nobuffer \
   -rw_timeout 1000000 \
   -f live_flv \
-  $@ \
-  "rtmp://${LIVE_SERVER}/live/${STREAM_KEY}"
+  "rtmp://${LIVE_SERVER}/live/${STREAM_KEY}" \
+  $@
 done

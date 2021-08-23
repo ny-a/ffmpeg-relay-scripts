@@ -6,6 +6,7 @@ LIVE_SERVER="${LIVE_SERVER:-localhost}"
 MAIN_STREAM_KEY="${MAIN_STREAM_KEY:-camera-main}"
 BACKUP_STREAM_KEY="${BACKUP_STREAM_KEY:-camera-backup}"
 V4L2_OUTPUT="${V4L2_OUTPUT:-/dev/video10}"
+INPUT_OPTION="${INPUT_OPTION:-}"
 FALLBACK_DURATION="${FALLBACK_DURATION:-60}"
 RESTART_TARGET="${RESTART_TARGET:-http://10.0.0.1:60152/liveview.JPG}"
 RESTART_SIGNAL="${RESTART_SIGNAL:-TERM}"
@@ -18,6 +19,7 @@ while true; do
   -probesize 32 -analyzeduration 0 \
   -fflags nobuffer \
   -rw_timeout 1000000 \
+  $INPUT_OPTION \
   -f live_flv -i "rtmp://${LIVE_SERVER}/live/${MAIN_STREAM_KEY}" \
   -strict experimental \
   $@ \
@@ -37,6 +39,7 @@ while true; do
   -probesize 32 -analyzeduration 0 \
   -fflags nobuffer \
   -rw_timeout 1000000 \
+  $INPUT_OPTION \
   -f live_flv -i "rtmp://${LIVE_SERVER}/live/${BACKUP_STREAM_KEY}" \
   -strict experimental \
   -t "$FALLBACK_DURATION" \

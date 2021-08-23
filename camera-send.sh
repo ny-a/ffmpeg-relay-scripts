@@ -4,6 +4,7 @@ set -u
 
 LIVE_SERVER="${LIVE_SERVER:-localhost}"
 STREAM_KEY="${PREVIEW_STREAM_KEY:-camera}"
+INPUT_OPTION="${INPUT_OPTION:-}"
 V4L2_INPUT="${V4L2_INPUT:-/dev/video10}"
 BITRATE="${BITRATE:-1M}"
 
@@ -11,6 +12,7 @@ while true; do
   ffmpeg -hide_banner \
   -use_wallclock_as_timestamps 1 \
   -fflags nobuffer \
+  $INPUT_OPTION \
   -f v4l2 -i "$V4L2_INPUT" \
   -strict experimental \
   -c:v flv -b:v "$BITRATE" \

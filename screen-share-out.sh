@@ -8,13 +8,17 @@ DISPLAY="${DISPLAY:-:0}"
 POSITION="${POSITION:-0,0}"
 VIDEO_SIZE="${VIDEO_SIZE:-1920x1080}"
 BITRATE="${BITRATE:-12M}"
+INPUT_OPTION="${INPUT_OPTION:-}"
+OUTPUT_OPTION="${OUTPUT_OPTION:-}"
 V4L2_OUTPUT="${V4L2_OUTPUT:-/dev/video11}"
 
 while true; do
   ffmpeg -hide_banner \
   -use_wallclock_as_timestamps 1 \
   -s "$VIDEO_SIZE" \
+  $INPUT_OPTION \
   -f x11grab -i "${DISPLAY}+${POSITION}" \
+  $OUTPUT_OPTION \
   -f v4l2 "$V4L2_OUTPUT" \
   -c:v flv -b:v "$BITRATE" -fflags flush_packets \
   -strict experimental \

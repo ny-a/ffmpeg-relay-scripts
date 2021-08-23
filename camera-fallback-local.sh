@@ -6,6 +6,7 @@ LIVE_SERVER="${LIVE_SERVER:-localhost}"
 MAIN_STREAM_KEY="${MAIN_STREAM_KEY:-camera-main}"
 BACKUP_V4L2_INPUT="${BACKUP_V4L2_INPUT:-/dev/video0}"
 V4L2_OUTPUT="${V4L2_OUTPUT:-/dev/video10}"
+INPUT_OPTION="${INPUT_OPTION:-}"
 VIDEO_SIZE="${VIDEO_SIZE:-640x360}"
 FALLBACK_DURATION="${FALLBACK_DURATION:-60}"
 RESTART_TARGET="${RESTART_TARGET:-http://10.0.0.1:60152/liveview.JPG}"
@@ -19,6 +20,7 @@ while true; do
   -probesize 32 -analyzeduration 0 \
   -fflags nobuffer \
   -rw_timeout 1000000 \
+  $INPUT_OPTION \
   -f live_flv -i "rtmp://${LIVE_SERVER}/live/${MAIN_STREAM_KEY}" \
   -strict experimental \
   $@ \
@@ -37,6 +39,7 @@ while true; do
   -use_wallclock_as_timestamps 1 \
   -fflags nobuffer \
   -video_size "$VIDEO_SIZE" \
+  $INPUT_OPTION \
   -f v4l2 -i "${BACKUP_V4L2_INPUT}" \
   -strict experimental \
   -t "$FALLBACK_DURATION" -pix_fmt yuv420p \

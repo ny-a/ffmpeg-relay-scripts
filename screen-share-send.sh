@@ -8,11 +8,13 @@ DISPLAY="${DISPLAY:-:0}"
 POSITION="${POSITION:-0,0}"
 VIDEO_SIZE="${VIDEO_SIZE:-1920x1080}"
 BITRATE="${BITRATE:-10M}"
+INPUT_OPTION="${INPUT_OPTION:-}"
 
 while true; do
   ffmpeg -hide_banner \
   -use_wallclock_as_timestamps 1 \
   -s "$VIDEO_SIZE" \
+  $INPUT_OPTION \
   -f x11grab -i "${DISPLAY}+${POSITION}" \
   -c:v flv -b:v "$BITRATE" -fflags flush_packets \
   -strict experimental \

@@ -4,6 +4,7 @@ set -u
 
 LIVE_SERVER="${LIVE_SERVER:-localhost}"
 STREAM_KEY="${STREAM_KEY:-screen}"
+INPUT_OPTION="${INPUT_OPTION:-}"
 V4L2_OUTPUT="${V4L2_OUTPUT:-/dev/video11}"
 
 while true; do
@@ -12,6 +13,7 @@ while true; do
   -probesize 32 -analyzeduration 0 \
   -fflags nobuffer \
   -rw_timeout 1000000 \
+  $INPUT_OPTION \
   -f live_flv -i "rtmp://${LIVE_SERVER}/live/${STREAM_KEY}" \
   $@ \
   -f v4l2 "$V4L2_OUTPUT"
