@@ -10,8 +10,7 @@ VIDEO_SIZE="${VIDEO_SIZE:-1920x1080}"
 FRAMERATE="${FRAMERATE:-30}"
 GOP="${GOP:-$(( $FRAMERATE * 2 ))}"
 BITRATE="${BITRATE:-1M}"
-MAXRATE="${MAXRATE:-5M}"
-BUFSIZE="${BUFSIZE:-10M}"
+QMAX="${QMAX:-20.0}"
 INPUT_OPTION="${INPUT_OPTION:-}"
 OUTPUT_OPTION="${OUTPUT_OPTION:-}"
 V4L2_OUTPUT="${V4L2_OUTPUT:-/dev/video11}"
@@ -24,7 +23,7 @@ while true; do
   -f x11grab -i "${DISPLAY}+${POSITION}" \
   $OUTPUT_OPTION \
   -f v4l2 "$V4L2_OUTPUT" \
-  -c:v flv -b:v "$BITRATE" -maxrate "$MAXRATE" -bufsize "$BUFSIZE" -fflags flush_packets \
+  -c:v flv -b:v "$BITRATE" -qmax "$QMAX" -fflags flush_packets \
   -strict experimental \
   -pix_fmt yuv420p -r "$FRAMERATE" -g "$GOP" -vsync 1 \
   -f fifo -fifo_format flv -map 0:v -drop_pkts_on_overflow 1 \
